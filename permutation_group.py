@@ -3,10 +3,10 @@ import helpers
 @helpers.memoize
 def make_permutation_set(set_size):
   if set_size <= 1:
-    return map(Permutation, [[0]])
+    return list(map(Permutation, [[0]]))
 
   if set_size == 2:
-    return map(Permutation, [[0, 1], [1, 0]])
+    return list(map(Permutation, [[0, 1], [1, 0]]))
   
   result = []
   previous_permutation_set = make_permutation_set(set_size - 1)
@@ -44,12 +44,18 @@ class PermutationGroup:
   def __init__(self, set_size):
     self.elements = make_permutation_set(set_size)
     self.set_names()
-
+    
   def set_names(self):
     name = 'e'
     for permutation in self.elements:
       permutation.set_name(name)
       name = helpers.get_next_char(name)
+
+  def get_by_name(self, name):
+    for element in self.elements:
+      if element.name is name:
+        return element
+    return None
 
   def get_elements_as_list(self):
     return map(lambda el: el.perm, self.elements)
