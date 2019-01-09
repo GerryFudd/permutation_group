@@ -79,3 +79,18 @@ class PermutationGroup:
 
   def multiply(self, a, b):
     return self.table[helpers.hash_pair(a, b)]
+  
+  def display_table(self):
+    table_string = ' '
+    for name in self.get_element_names():
+      table_string += ' ' + name
+    
+    table_string += '\n'
+    for multiplier in self.get_element_names():
+      table_string += multiplier
+      for multiplicand in self.get_element_names():
+        table_string += ' ' + self.multiply(multiplier, multiplicand).name
+      
+      table_string += '\n'
+
+    return table_string

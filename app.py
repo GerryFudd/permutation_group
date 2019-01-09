@@ -26,8 +26,12 @@ def multiply():
 
 option = ''
 while option != 'leave':
-  option = input("What would you like to do?\n(multiply, leave)> ")
+  option = input("What would you like to do?\n(multiply, view, leave)> ")
   if option == 'multiply':
     multiply()
+  elif option == 'view':
+    print(group.display_table())
+  elif option != 'leave':
+    print('"{0}" is not a valid option.'.format(option))
 
 
