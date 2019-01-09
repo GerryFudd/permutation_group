@@ -42,23 +42,23 @@ class Permutation:
 
 class PermutationGroup:
   def __init__(self, set_size):
-    self.elements = make_permutation_set(set_size)
-    self.set_names()
-    
-  def set_names(self):
+    self.elements = {}
+    values = make_permutation_set(set_size)
     name = 'e'
-    for permutation in self.elements:
+    for permutation in values:
       permutation.set_name(name)
+      self.elements[name] = permutation
       name = helpers.get_next_char(name)
 
   def get_by_name(self, name):
-    for element in self.elements:
-      if element.name is name:
-        return element
+    if self.elements[name]:
+      return self.elements[name]
+    
     return None
 
   def get_elements_as_list(self):
-    return map(lambda el: el.perm, self.elements)
+    return list(self.elements.values)
 
   def get_element_names(self):
-    return map(lambda el: el.name, self.elements)
+    print(self.elements.keys())
+    return self.elements.keys()
