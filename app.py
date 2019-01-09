@@ -14,5 +14,20 @@ for name in group.get_element_names():
   name_index += 1
 print(names_message.format(*names_list))
 
-selected_element = input("Which element would you like to see?\n> ")
-print(group.get_by_name(selected_element).perm)
+def multiply():
+  nameA = input("Let's multiply two elements.\nChoose a multiplier.\n> ")
+  a = group.get_by_name(nameA)
+  print('{0} = {1}'.format(a.name, a.perm))
+  nameB = input("Choose a multiplicand.\n> ")
+  b = group.get_by_name(nameB)
+  print('{0} = {1}'.format(b.name, b.perm))
+  product = group.multiply(a.name, b.name)
+  print('{0}{1} = {2} = {3}'.format(a.name, b.name, product.name, product.perm))
+
+option = ''
+while option != 'leave':
+  option = input("What would you like to do?\n(multiply, leave)> ")
+  if option == 'multiply':
+    multiply()
+
+

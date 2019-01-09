@@ -24,9 +24,8 @@ def get_next_char(char):
   
   if char is 'Z':
     return u'\u03b1'
-  
-  # if isinstance(char, unicode):
-  #   print(char)
-  #   return unichr(ord(char) + 1)
 
   return chr(ord(char) + 1)
+
+def hash_pair(a, b):
+  return '{0},{1}'.format(a, b)

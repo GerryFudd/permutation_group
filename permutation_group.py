@@ -49,16 +49,33 @@ class PermutationGroup:
       permutation.set_name(name)
       self.elements[name] = permutation
       name = helpers.get_next_char(name)
+    self.table = self.__make_multiplication_table()
 
   def get_by_name(self, name):
     if self.elements[name]:
       return self.elements[name]
-    
-    return None
-
+  
   def get_elements_as_list(self):
-    return list(self.elements.values)
+    return self.elements.values()
+  
+  def get_by_value(self, perm):
+    for element in self.get_elements_as_list():
+      if element.perm == perm:
+        return element
 
   def get_element_names(self):
-    print(self.elements.keys())
     return self.elements.keys()
+
+  def __multiply(self, a, b):
+    return self.get_by_value(self.get_by_name(a).apply(self.get_by_name(b).perm))
+
+  def __make_multiplication_table(self):
+    table = {}
+    for a in self.get_elements_as_list():
+      for b in self.get_elements_as_list():
+        table[helpers.hash_pair(a.name, b.name)] = self.__multiply(a.name, b.name)
+    
+    return table
+
+  def multiply(self, a, b):
+    return self.table[helpers.hash_pair(a, b)]
